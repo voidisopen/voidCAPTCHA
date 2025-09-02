@@ -44,7 +44,7 @@
     // links
     const links=document.createElement("div"); 
     links.style.fontSize="12px"; links.style.color="#aaa"; links.style.marginTop="8px";
-    links.innerHTML=`<a href="https://example.com" target="_blank" style="color:#8ab4f8;">Privacy Policy</a> | <a href="https://example.com" target="_blank" style="color:#8ab4f8;">Terms of Service</a>`;
+    links.innerHTML=`<a href="https://voidisopen.github.io/voidCAPTCHA/privacy.html" target="_blank" style="color:#8ab4f8;">Privacy Policy</a> | <a href="https://voidisopen.github.io/voidCAPTCHA/tos.html" target="_blank" style="color:#8ab4f8;">Terms of Service</a>`;
 
     // instruction & result
     const instruction=document.createElement("p"); 
