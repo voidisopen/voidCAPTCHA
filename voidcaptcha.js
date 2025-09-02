@@ -41,10 +41,10 @@
     label.innerText="I'm not a robot";
     cbContainer.appendChild(checkbox); cbContainer.appendChild(label);
 
-    // links (real ones)
+    // links
     const links=document.createElement("div"); 
     links.style.fontSize="12px"; links.style.color="#aaa"; links.style.marginTop="8px";
-    links.innerHTML=`<a href="https://voidisopen.github.io/voidCAPTCHA/privacy.html" target="_blank" style="color:#aaa;text-decoration:none;">Privacy Policy</a> | <a href="https://voidisopen.github.io/voidCAPTCHA/tos.html" target="_blank" style="color:#aaa;text-decoration:none;">Terms of Service</a>`;
+    links.innerHTML=`<a href="https://example.com" target="_blank" style="color:#8ab4f8;">Privacy Policy</a> | <a href="https://example.com" target="_blank" style="color:#8ab4f8;">Terms of Service</a>`;
 
     // instruction & result
     const instruction=document.createElement("p"); 
@@ -124,28 +124,26 @@
     }
 
     function onBoxClick(e,el,result){
-      if(Date.now()<blockedUntil){ result.innerText="⏳ Still cooling down..."; return; }
+      if(Date.now()<blockedUntil) return;
+      const color=el.dataset.color;
+      if(color!==target){el.style.filter="blur(2px)"; setTimeout(()=>el.style.filter="",350); setTimeout(setTarget,350); return;}
 
       const rect=el.getBoundingClientRect();
       const clickX=e.clientX-rect.left, clickY=e.clientY-rect.top;
       const forbiddenX=(rect.width/100)*BASE_TINY+1;
       const forbiddenY=(rect.height/100)*BASE_TINY+1;
 
-      if(el.dataset.color===target){
-        if(Math.abs(clickX-rect.width/2)<=forbiddenX && Math.abs(clickY-rect.height/2)<=forbiddenY){
-          pass();
-        }else{
-          failAttempt("❌ Wrong spot! Try again.");
-        }
-      }else{
-        failAttempt("❌ Wrong color! Try again.");
+      if(Math.abs(clickX-rect.width/2)<forbiddenX && Math.abs(clickY-rect.height/2)<forbiddenY){
+        failAttempt("❌ Try Again!"); return;
       }
+
+      pass();
     }
 
-    // checkbox logic
+    // checkbox click → show boxes
     checkbox.addEventListener("change",()=>{
-      if(verified){ checkbox.checked=true; checkbox.disabled=true; return; }
-      if(checkbox.checked){ boxesWrap.style.display="flex"; setTarget(); }
+      if(verified){ checkbox.checked=true; checkbox.disabled=true; return;}
+      if(checkbox.checked){ boxesWrap.style.display="flex"; setTarget();}
     });
   }
 
