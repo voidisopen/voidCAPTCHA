@@ -1,4 +1,5 @@
-```javascript
+
+    // voidcaptcha.js made by voidisopen credits, removing this is bad ©️ 2025 voidisopen
 // voidcaptcha.js
 (function(){
   const COLORS=["red","blue"];
@@ -42,10 +43,10 @@
     label.innerText="I'm not a robot";
     cbContainer.appendChild(checkbox); cbContainer.appendChild(label);
 
-    // links
+    // links (real ones)
     const links=document.createElement("div"); 
     links.style.fontSize="12px"; links.style.color="#aaa"; links.style.marginTop="8px";
-    links.innerHTML=`<a href="privacy.html" target="_blank" style="color:#8ab4f8;">Privacy Policy</a> | <a href="tos.html" target="_blank" style="color:#8ab4f8;">Terms of Service</a>`;
+    links.innerHTML=`Privacy Policy | Terms of Service`;
 
     // instruction & result
     const instruction=document.createElement("p"); 
@@ -125,30 +126,13 @@
     }
 
     function onBoxClick(e,el,result){
-      if(Date.now()<blockedUntil) return;
-      const color=el.dataset.color;
-      if(color!==target){el.style.filter="blur(2px)"; setTimeout(()=>el.style.filter="",350); setTimeout(setTarget,350); return;}
-
-      const rect=el.getBoundingClientRect();
-      const clickX=e.clientX-rect.left, clickY=e.clientY-rect.top;
-      const forbiddenX=(rect.width/100)*BASE_TINY+1;
-      const forbiddenY=(rect.height/100)*BASE_TINY+1;
-
-      if(Math.abs(clickX-rect.width/2)<forbiddenX && Math.abs(clickY-rect.height/2)<forbiddenY){
-        failAttempt("❌ Try Again!"); return;
-      }
-
-      pass();
-    }
-
-    // checkbox click → show boxes
-    checkbox.addEventListener("change",()=>{
-      if(verified){ checkbox.checked=true; checkbox.disabled=true; return;}
-      if(checkbox.checked){ boxesWrap.style.display="flex"; setTarget();}
+      if(Date.now(){
+      if(verified){ checkbox.checked=true; checkbox.disabled=true; return; }
+      if(checkbox.checked){ boxesWrap.style.display="flex"; setTarget(); }
     });
   }
 
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",createOverlay);
   else createOverlay();
 })();
-```
+
