@@ -47,6 +47,22 @@
 <!-- troller 😡e-->
     </a>
 </div>
+<div id="displayBox" style="background:white;padding:20px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.2);max-width:500px;white-space:pre-wrap;font-family:monospace;">
+  Fetching add.js...
+</div>
+
+<pre><code>
+<script>
+fetch('add.js')
+  .then(res => res.text())
+  .then(code => {
+    document.getElementById('displayBox').innerText = code;
+  })
+  .catch(err => {
+    document.getElementById('displayBox').innerText = 'Failed to load add.js: ' + err;
+  });
+</script>
+</code></pre>
 
 <!-- EULA Modal -->
 <div id="eula-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:9999;">
@@ -186,7 +202,7 @@ agreeBtn.addEventListener('click', () => {
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium text-gray-900">4. Optional Customization</h3>
             <p class="mt-1 text-sm text-gray-500">
-                You can tweak box colors, word length, or cooldowns in <code>voidcaptcha.js</code>:
+                You can tweak box colors, word length, or cooldowns in <code>server.js</code>:
             </p>
             <pre><code>const COLORS = ["red", "blue"];      // Box colors
 const MIN_WORD_LENGTH = 12;          // Typing word length
@@ -195,22 +211,6 @@ const MAX_TRIES_BEFORE_TIMEOUT = 3;  // Number of attempts before timeout</code>
         </div>
     </div>
 
-    <div class="bg-indigo-50 rounded-lg p-6">
-        <div class="flex items-start">
-            <svg class="h-5 w-5 text-indigo-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 8v4"></path>
-            </svg>
-            <div class="ml-3">
-                <h3 class="text-sm font-medium text-indigo-800">Important Note</h3>
-                <div class="mt-2 text-sm text-indigo-700">
-                    <p>
-                        VoidCaptcha is entirely client-side. There is no form connection. Verification is handled internally via the checkbox and overlay.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <footer class="bg-white py-12 text-center text-gray-400">
     &copy; 2025 VoidCaptcha. All rights reserved. Contact: voidisopenscience@gmail.com
