@@ -32,16 +32,59 @@
         <p class="mt-3 text-xl text-gray-500 max-w-2xl mx-auto">
             Quickly set up the self-contained VoidCaptcha overlay on your page.
         </p>
+  <button id="download-btn">Download VoidCaptcha</button>
+
+<!-- Modal -->
+<div id="eula-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:9999;">
+  <div style="background:#111;color:#eee;padding:20px;border-radius:12px;max-width:500px;text-align:left;">
+    <h2>VoidCaptcha EULA</h2>
+    <div style="max-height:300px;overflow-y:auto;margin:10px 0;border:1px solid #444;padding:10px;">
+      <p>VoidCaptcha is licensed, not sold. You are granted a limited, non-exclusive, non-transferable license to install and use VoidCaptcha solely for its intended purpose.</p>
+      <p>You may not:</p>
+      <ul>
+        <li>Modify, alter, edit, or create derivative works of VoidCaptcha.</li>
+        <li>Reverse engineer, decompile, or disassemble the software.</li>
+        <li>Redistribute, sublicense, or resell VoidCaptcha without express written consent.</li>
+        <li>Use VoidCaptcha for any unlawful, harmful, or abusive purpose.</li>
+      </ul>
+      <p>VoidCaptcha is and shall remain the exclusive property of its authors. You receive no ownership rights to the software, only a license to use it.</p>
+      <p style="margin-top:10px;font-weight:bold;color:#ff5555;">DO NOT CHANGE THE CODE AS STATED IN THE EULA</p>
     </div>
-    <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-12 px-4 py-5 sm:px-6">
-    <h3 class="text-lg font-medium text-gray-900">Download VoidCaptcha</h3>
-    <p class="mt-1 text-sm text-gray-500">Click the button below to download the latest <code>voidcaptcha.js</code> file:</p>
-    <a href="voidcaptcha.js" download
-       class="mt-4 inline-block px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition">
-       Download voidcaptcha.js
-    </a>
-    <p class="mt-2 text-sm text-gray-400">After downloading, include it before your closing <code>&lt;/body&gt;</code> tag as described above.</p>
+    <button id="agree-btn" disabled>Agree & Download (5)</button>
+  </div>
 </div>
+
+<script>
+const downloadBtn = document.getElementById('download-btn');
+const eulaModal = document.getElementById('eula-modal');
+const agreeBtn = document.getElementById('agree-btn');
+
+downloadBtn.addEventListener('click', () => {
+  eulaModal.style.display = 'flex';
+  let countdown = 5;
+  agreeBtn.textContent = `Agree & Download (${countdown})`;
+  agreeBtn.disabled = true;
+
+  const interval = setInterval(() => {
+    countdown--;
+    agreeBtn.textContent = `Agree & Download (${countdown})`;
+    if (countdown <= 0) {
+      clearInterval(interval);
+      agreeBtn.textContent = 'Agree & Download';
+      agreeBtn.disabled = false;
+    }
+  }, 1000);
+});
+
+agreeBtn.addEventListener('click', () => {
+  // trigger actual download
+  const a = document.createElement('a');
+  a.href = 'voidcaptcha.js'; // your file path
+  a.download = 'voidcaptcha.js';
+  a.click();
+  eulaModal.style.display = 'none';
+});
+</script>
 
 
     <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-12">
